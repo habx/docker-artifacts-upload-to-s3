@@ -4,3 +4,4 @@ DST="s3://${PLUGIN_S3_REPO}/${DRONE_REPO_NAME}/$(date -d @${DRONE_BUILD_CREATED}
 CMD="aws s3 cp ${ARTIFACT} ${DST}"
 echo $CMD
 $CMD
+
