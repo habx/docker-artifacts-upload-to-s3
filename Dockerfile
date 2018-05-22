@@ -1,11 +1,9 @@
-FROM alpine:latest
+FROM debian
 
-RUN	mkdir -p /aws && \
-	apk -Uuv add groff less python py-pip && \
-	pip install awscli && \
-	apk --purge -v del py-pip && \
-	rm /var/cache/apk/*
+RUN apt-get update && apt-get install -y python python-pip curl unzip groff
+RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+RUN pip install awscli
 
-COPY entrypoint.sh
+COPY entrypoint.sh .
 
-ENTRYPOINT ["entrypoint.sh"]
+CMD ["./entrypoint.sh"]
